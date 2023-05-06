@@ -1,2 +1,2 @@
-# ProectoFinalRodrigo
-Proyecyo final curso Javascript - CODERHOUSE
+# ProyectoFinalRodrigo
+Proyecto final curso Javascript - CODERHOUSE
