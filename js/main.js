@@ -2,8 +2,8 @@
 const sector = document.querySelector("#sector"),
   nombre = document.querySelector("#nombre"),
   marca = document.querySelector("#marca"),
-  hsKm = document.querySelector("#hsKm"),//tiene el type="number"
-  anio = document.querySelector("#anio"),//tiene el type="number"
+  hsKm = document.querySelector("#hsKm"),
+  anio = document.querySelector("#anio"),
   img = document.querySelector("#img"),
   search = document.querySelector("#search"),
   tbody = document.querySelector("#table-body"),
@@ -37,15 +37,6 @@ const maquinaria = [{
 ];
 
 
-// Método ->  localStorage.setItem(clave, valor)
-// clave = nombre para identificar el elemento 
-// valor = valor/contenido del elemento 
-
-//Método ->  sessionStorage.setItem(clave, valor)
-// clave = nombre del elemento
-// valor = Contenido del elemento
-
-
 //Seteo variable maquinas, si LS vacio entonces maquinas = maquinaria
 //inicializo la variable maquinas y le asigno un valor
 let maquinas = JSON.parse(localStorage.getItem("maquinaria")) || maquinaria;
@@ -65,6 +56,7 @@ function Maquina(nombre, marca, hsKm, anio, sector, img) {
 
 
 /* Declaración de Funciones */
+
 //Cargar al inventario
 function cargarMaquinaria(arr, maquina) {
   arr.push(maquina);
@@ -78,20 +70,28 @@ function guardarLS(arr) {
   localStorage.setItem("maquinaria", JSON.stringify(arr));
 }
 
-
 //Función de búsqueda genérica
 function filtrar(arr, filtro, param) {
   return arr.filter((el) => {
     if (param == "item") {
       return el.item == parseFloat(filtro);
-    } else {
-      return el[`${param}`].includes(filtro.toLowerCase());
+    } else if (param == "horas/kilometros") {
+      console.log("estoy en el elfe if");
+      return el.hsKm <= parseFloat(filtro);
     } 
-      // return param == "item" ?
-      // el.item == parseFloat(filtro) :
-      // el[`${param}`].includes(filtro.toLowerCase());
+    else if (param == "anio") {
+      console.log("estoy en el elfe if del año");
+      return el.anio <= parseFloat(filtro);
+    } 
+    else if (param == [`${param}`]) {
+      return el[`${param}`].includes(filtro.toLowerCase());
+      
+    }
+    
   });
 }
+
+
 
 
 function filtrarmaquinas(){
@@ -104,28 +104,42 @@ function filtrarmaquinas(){
   }
   if(document.getElementById("radio2").checked){
     //filtrar nombre
-    let nuevoFiltro = filtrar(maquinas, search.value, "nombre");
+    let nuevoFiltro = filtrar(maquinas, search.value,"nombre");
       crearHtml(nuevoFiltro);
+      console.log(nuevoFiltro);
       console.log("el valor ingresado es "+search.value);
       formEditor.reset()
   }
   if(document.getElementById("radio3").checked){
-    //filtrar horas/km
-  
+    //filtrar marca
+    let nuevoFiltro = filtrar(maquinas, search.value,"marca");
+      crearHtml(nuevoFiltro);
+      console.log(nuevoFiltro);
+      console.log("el valor ingresado es "+search.value);
+      formEditor.reset()
   }
   if(document.getElementById("radio4").checked){
-    //filtrar año
-    
+    //filtrar hs km
+    let nuevoFiltro = filtrar(maquinas, search.value,"horas/kilometros");
+    crearHtml(nuevoFiltro);
+    console.log(nuevoFiltro);
+    console.log("el valor ingresado es "+search.value);
+    formEditor.reset()
   }
   if(document.getElementById("radio5").checked){
-    //filtrar sector
-    
+    //filtrar año
+    let nuevoFiltro = filtrar(maquinas, search.value,"anio");
+    crearHtml(nuevoFiltro);
+    console.log(nuevoFiltro);
+    console.log("el valor ingresado es "+search.value);
+    formEditor.reset()
   }
   if(document.getElementById("radio6").checked){
     //filtrar sector
-    let nuevoFiltro = filtrar(maquinas, search.value, "sector");
+    let nuevoFiltro = filtrar(maquinas, search.value,"sector");
       crearHtml(nuevoFiltro);
-      console.log("el valor ingresado es "+search.value);
+      console.log(nuevoFiltro);
+      console.log("el valor ingresado es "+search.value+" y estoy buscando en sector");
       formEditor.reset()
   }
 }
@@ -138,37 +152,6 @@ function filtrarmaquinas(){
 
 
 //Listeners de búsqueda
-
-//search = document.querySelector("#search"),
-
-// search.addEventListener("input", () => {
-//   let nuevoFiltro = filtrar(maquinas, search.value, "item");
-//   crearHtml(nuevoFiltro);
-//   console.log("el valor ingresado es "+search.value);
-// });
-
-
-// for (const radio of radios) {
-//   radio.addEventListener("change", () => {
-//     if (radio.checked) {
-//       search.addEventListener("input", () => { 
-//         let nuevoFiltro = filtrar(maquinas, search.value, radio.value);
-//         console.log("el valor es "+radio.value);
-//         crearHtml(nuevoFiltro);
-//       });
-//     }
-//   });
-// }
-
-
-
-
-
-
-
-
-
-
 
 
 //Funcion para editar las horas o kilometros actuales de la maquina
@@ -249,26 +232,5 @@ formMaquinas.addEventListener("submit", (e) => {
   formMaquinas.reset()
 });
 
-//Listeners de búsqueda
-// search.addEventListener("input", () => {
-//   let nuevoFiltro = filtrar(maquinas, search.value, "nombre");
-//   crearHtml(nuevoFiltro);
-// });
-
-//radio buttons
-// for (const radio of radios) {
-//   radio.addEventListener("change", () => {
-//     if (radio.checked) {
-//       search.addEventListener("input", () => { 
-//         let nuevoFiltro = filtrar(maquinas, search.value, radio.value);
-//         crearHtml(nuevoFiltro);
-//       });
-//     }
-//   });
-// }
 
 
-// TENGO QUE ARREGLAR:
-// LOS FILTROS (RADIOS)
-// QUE BUSQUE EN TODO EL ARRAY DE MAQUINARIAS Y maquinas
-// QUE NO SE REPITAN LOS ITEMS, TENGO QUE LOGRAR Q SEAN ITEMS INDIVIDUALES ----- https://desarrolloweb.com/articulos/1006.php
