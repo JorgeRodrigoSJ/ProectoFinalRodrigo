@@ -71,90 +71,27 @@ function guardarLS(arr) {
 }
 
 //Función de búsqueda genérica
-function filtrar(arr, filtro, param) {
-  return arr.filter((el) => {
-    if (param == "item") {
-      return el.item == parseFloat(filtro);
-    } else if (param == "horas/kilometros") {
-      console.log("estoy en el elfe if");
-      return el.hsKm <= parseFloat(filtro);
-    } 
-    else if (param == "anio") {
-      console.log("estoy en el elfe if del año");
-      return el.anio <= parseFloat(filtro);
-    } 
-    else if (param == [`${param}`]) {
-      return el[`${param}`].includes(filtro.toLowerCase());
-      
+
+//serch.value es param
+function filtrar(filtro, param) {
+	return maquinas.filter((producto) => {
+    if(filtro==nombre){
+      console.log("estoy en el if " + producto[filtro]);
+      return producto[param].includes(filtro.toLowerCase());
+    }else {
+      return producto[filtro] == param;
+      //console.log("estoy en el else " + producto[filtro]);
     }
-    
   });
 }
 
 
-
-
-function filtrarmaquinas(){
-  if(document.getElementById("radio1").checked){
-    //filtrar item
-    let nuevoFiltro = filtrar(maquinas, search.value, "item");
-      crearHtml(nuevoFiltro);
-      console.log("el valor ingresado es "+search.value);
-      formEditor.reset()
-  }
-  if(document.getElementById("radio2").checked){
-    //filtrar nombre
-    let nuevoFiltro = filtrar(maquinas, search.value,"nombre");
-      crearHtml(nuevoFiltro);
-      console.log(nuevoFiltro);
-      console.log("el valor ingresado es "+search.value);
-      formEditor.reset()
-  }
-  if(document.getElementById("radio3").checked){
-    //filtrar marca
-    let nuevoFiltro = filtrar(maquinas, search.value,"marca");
-      crearHtml(nuevoFiltro);
-      console.log(nuevoFiltro);
-      console.log("el valor ingresado es "+search.value);
-      formEditor.reset()
-  }
-  if(document.getElementById("radio4").checked){
-    //filtrar hs km
-    let nuevoFiltro = filtrar(maquinas, search.value,"horas/kilometros");
-    crearHtml(nuevoFiltro);
-    console.log(nuevoFiltro);
-    console.log("el valor ingresado es "+search.value);
-    formEditor.reset()
-  }
-  if(document.getElementById("radio5").checked){
-    //filtrar año
-    let nuevoFiltro = filtrar(maquinas, search.value,"anio");
-    crearHtml(nuevoFiltro);
-    console.log(nuevoFiltro);
-    console.log("el valor ingresado es "+search.value);
-    formEditor.reset()
-  }
-  if(document.getElementById("radio6").checked){
-    //filtrar sector
-    let nuevoFiltro = filtrar(maquinas, search.value,"sector");
-      crearHtml(nuevoFiltro);
-      console.log(nuevoFiltro);
-      console.log("el valor ingresado es "+search.value+" y estoy buscando en sector");
-      formEditor.reset()
-  }
+function filtrarmaquinas() {
+	const nuevoFiltro = filtrar(formEditor.group.value, search.value);
+  console.log("estamos filtrando por "+formEditor.group.value);
+	crearHtml(nuevoFiltro);
 }
 
-
-
-
-
-
-
-
-//Listeners de búsqueda
-
-
-//Funcion para editar las horas o kilometros actuales de la maquina
 
 
 //Manipular el DOM
@@ -198,7 +135,7 @@ function respuestaClick (e){
   console.log(maquinas[posicionArray]);
   maquinas[posicionArray].hsKm = editor.value;
   console.log("las nuevas horas o kilometros de la maquina seleccionada son Hs/Km "+ maquinas[posicionArray].hsKm);
-  //ahora tengo que pushearlas y listo
+  //ahora tengo que pushearlas
   crearHtml(maquinas);
   guardarLS(maquinas);
   formEditor.reset()//este resetea la pantalla
