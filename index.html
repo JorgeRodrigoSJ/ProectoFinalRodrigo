@@ -19,51 +19,49 @@
   <!-- búsqueda -->
   <div class="col m1"></div>
   <form id="formEditor">
-      <div class="col m8 s4 m7" id="contenedor">
-        <!-- Cuadro de búsqueda -->
-        <div class="row">
-          <div class="col m12 s12">
-            <i class="material-icons">search</i>
-            <div class="input-field inline">
-              <input id="search" type="search" class="validate">
-              <label for="search">Buscar</label>
-              <input type="button" value="Filtrar" onclick="filtrarmaquinas()">
-            </div>
-            <div class="col m12 s12">
-              <form id="formEditor">
-                <span>
-                  <label>
-                    <input class="with-gap" id="radio1" name="group" type="radio" value='Item'  />
-                    <span>Item</span>
-                  </label>
-                  <label>
-                    <input class="with-gap" id="radio2" name="group" type="radio" value='Nombre'  />
-                    <span>Nombre</span>
-                  </label>
-                  <label>
-                    <input class="with-gap" id="radio3" name="group" type="radio" value='Marca'  />
-                    <span>Marca</span>
-                  </label>
-                  <label>
-                    <input class="with-gap" id="radio4" name="group" type="radio" value='horas/kilometros'  />
-                    <span>Horas/kilometros</span>
-                  </label>
-                  <label>
-                    <input class="with-gap" id="radio5" name="group" type="radio" value='año'  />
-                    <span>año</span>
-                  </label>
-                  <label>
-                    <input class="with-gap" id="radio6" name="group" type="radio" value='sector'  />
-                    <span>Sector</span>
-                  </label>
-                </span>
-              </form>
-            </div>
+    <div class="col m8 s4 m7" id="contenedor">
+      <!-- Cuadro de búsqueda -->
+      <div class="row">
+        <div class="col m12 s12">
+          <i class="material-icons">search</i>
+          <div class="input-field inline">
+            <input id="search" type="search" class="validate">
+            <label for="search">Buscar</label>
+            <input type="button" value="Filtrar" onclick="filtrarmaquinas()">
           </div>
-         </div>
+          <div class="col m12 s12">
+              <span>
+                <label>
+                  <input class="with-gap" id="radio1" name="group" type="radio" value='item'  />
+                  <span>Item</span>
+                </label>
+                <label>
+                  <input class="with-gap" id="radio2" name="group" type="radio" value='nombre'  />
+                  <span>Nombre</span>
+                </label>
+                <label>
+                  <input class="with-gap" id="radio3" name="group" type="radio" value='marca'  />
+                  <span>Marca</span>
+                </label>
+                <label>
+                  <input class="with-gap" id="radio4" name="group" type="radio" value='hsKm'  />
+                  <span>Horas/kilometros</span>
+                </label>
+                <label>
+                  <input class="with-gap" id="radio5" name="group" type="radio" value='anio'  />
+                  <span>año</span>
+                </label>
+                <label>
+                  <input class="with-gap" id="radio6" name="group" type="radio" value='sector'  />
+                  <span>Sector</span>
+                </label>
+              </span>
+          </div>
         </div>
+       </div>
       </div>
-    </form>
+    </div>
+  </form>
     <!-- Tabla dinamica -->
   <table class="responsive-table striped" id="tabla">
     <thead>
