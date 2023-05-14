@@ -72,23 +72,16 @@ function guardarLS(arr) {
 
 //Función de búsqueda genérica
 
-//serch.value es param
 function filtrar(filtro, param) {
 	return maquinas.filter((producto) => {
-    if(filtro==nombre){
-      console.log("estoy en el if " + producto[filtro]);
-      return producto[param].includes(filtro.toLowerCase());
-    }else {
       return producto[filtro] == param;
-      //console.log("estoy en el else " + producto[filtro]);
     }
-  });
-}
-
+  )};
 
 function filtrarmaquinas() {
 	const nuevoFiltro = filtrar(formEditor.group.value, search.value);
   console.log("estamos filtrando por "+formEditor.group.value);
+  console.log("el valor ingresado es "+ search.value);
 	crearHtml(nuevoFiltro);
 }
 
