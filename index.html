@@ -8,6 +8,7 @@
   <link rel="shortcut icon" href="#" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
   <link rel="stylesheet" href="./css/style.css" />
   <title>Registro horas maquina</title>
 </head>
@@ -132,30 +133,32 @@
   <!-- BUSCADOR DE MAQUINA Y EDITOR -->
   <div class="seteo">
     <h3>Editor de Horas maquina o Kilometros</h3>
-  <div class="container-fluid">
-      <div class="row ">
-        <div class="col m3 ">
+      <div class="container-fluid">
+        <div class="row ">   
             <form class="col s12" id="formEditor">
-                <div class="row">
-                  <div class="input-field col m12 s12">
-                    <input id="selectoritem" type="number" class="validate" />
-                    <label for="selectoritem">Seleccione item a editar</label>
+              <div class="col m3 ">
+                  <div class="row">
+                    <div class="input-field col m12 s12">
+                      <input id="selectoritem" type="number" class="validate" />
+                      <label for="selectoritem">Seleccione item a editar</label>
+                    </div>
                   </div>
+                  <div class="row">
+                    <div class="input-field col s12">
+                      <input id="editor" type="number" class="validate" />
+                      <label for="editor">cargue las Horas/Kilometros</label>
+                    </div>
                 </div>
-                <div class="row">
-                  <div class="input-field col s12">
-                    <input id="editor" type="number" class="validate" />
-                    <label for="editor">cargue las Horas/Kilometros</label>
-                  </div>
-                </div>
-                <input type="submit" id="btnCargar" class="btn" value="Sobre Escribir hs o km a la maquina">
+                <input type="submit" id="btnCargar" class="btn" value="Enter" onclick="respuestaClick ()">
+                <label for="btnCargar">Sobre Escribir hs o km a la maquina</label>
               </div>
             </form>
         </div>
       </div>
   </div>
   <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
   <script src="./js/main.js"></script>
 </body>
 
