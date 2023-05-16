@@ -14,6 +14,7 @@ const radios = document.querySelectorAll('input[type="radio"]');
 const selectoritem = document.querySelector("#selectoritem");
 const editor = document.querySelector("#editor");
 const formEditor = document.querySelector("#formEditor");
+const btnCargar = document.getElementById("btnCargar");
 
 //Maquinas ya guardadas en inventario de maquinas - array de objetos
 const maquinaria = [{
@@ -41,6 +42,7 @@ const maquinaria = [{
 //inicializo la variable maquinas y le asigno un valor
 let maquinas = JSON.parse(localStorage.getItem("maquinaria")) || maquinaria;
 
+console.log(maquinas);
 
 //Constructor del objeto maquina ¡ojo que la primera esta en mayuscula!
 function Maquina(nombre, marca, hsKm, anio, sector, img) {
@@ -62,9 +64,8 @@ function cargarMaquinaria(arr, maquina) {
   arr.push(maquina);
 }
 
-console.log(maquinas);
-
 //Funciones de LS
+
 //Con JSON.stringify podemos transformar un objeto JavaScript a un string en formato JSON. 
 function guardarLS(arr) {
   localStorage.setItem("maquinaria", JSON.stringify(arr));
@@ -85,12 +86,9 @@ function filtrarmaquinas() {
 	crearHtml(nuevoFiltro);
 }
 
-
-
 //Manipular el DOM
 function crearHtml(arr) {
   tbody.innerHTML = "";
-
   let html = "";
   for (const elem of arr) {
     const {item,nombre,marca,hsKm,anio,sector,img} = elem;
@@ -120,32 +118,45 @@ function crearHtml(arr) {
 }
 
 //editor de hs y km
-const btnCargar = document.getElementById("btnCargar");
+
+// btnCargar.addEventListener('click', () => {
+//   console.log("alertawachin");
+//   Toastify({
+//       text: "Probando toast!",
+//       duration: 6000
+//   }).showToast();
+// })
+
+
 function respuestaClick (e){
-  e.preventDefault();
+ // e.preventDefault();
   posicionArray = selectoritem.value-1;
   console.log(posicionArray);
   console.log(maquinas[posicionArray]);
   maquinas[posicionArray].hsKm = editor.value;
   console.log("las nuevas horas o kilometros de la maquina seleccionada son Hs/Km "+ maquinas[posicionArray].hsKm);
   //ahora tengo que pushearlas
-  crearHtml(maquinas);
   guardarLS(maquinas);
+  crearHtml(maquinas);
+  Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: 'Your work has been saved',
+    showConfirmButton: false,
+    timer: 6000
+  })
   formEditor.reset()//este resetea la pantalla
 }
 
-formEditor.addEventListener("submit",respuestaClick);
-
 /* Fin de funciones */
 
-//####
 /* Ejecución de funciones */
 crearHtml(maquinas);
 
 //Listeners
 
 formMaquinas.addEventListener("submit", (e) => {
-  e.preventDefault();
+  //e.preventDefault();
   const nuevoMaquina = new Maquina(
     nombre.value,
     marca.value,
