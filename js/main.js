@@ -19,20 +19,20 @@ const btnCargar = document.getElementById("btnCargar");
 //Maquinas ya guardadas en inventario de maquinas - array de objetos
 const maquinaria = [{
     item: 1,
-    nombre: "Autoelevador 1",
-    marca: "Yale",
+    nombre: "autoelevador 1",
+    marca: "yale",
     hsKm: 30500,
     anio: 2001,
-    sector: "Mantenimiento",
+    sector: "mantenimiento",
     img: "https://www.yale.com.ar/autoelevadores/dist/images/montacarga.png",
   },
   {
     item: 2,
-    nombre: "Camioneta",
-    marca: "Reanault",
+    nombre: "camioneta",
+    marca: "reanault",
     hsKm: 6443924,
     anio: 1995,
-    sector: "Fraccionamiento",
+    sector: "fraccionamiento",
     img: "https://autotest.com.ar/wp-content/uploads/2022/08/Renault-Kangoo-die%CC%81sel-1.jpg",
   },
 ];
@@ -73,11 +73,27 @@ function guardarLS(arr) {
 
 //Función de búsqueda genérica
 
-function filtrar(filtro, param) {
-	return maquinas.filter((producto) => {
-      return producto[filtro] == param;
-    }
-  )};
+  function filtrar(filtro, param) {
+    return maquinas.filter((producto) => {
+      if (filtro == "item") {
+        return producto[filtro] == param;
+     } else if (filtro == "hsKm") {
+        return producto[filtro] == param;
+     } else if (filtro == "anio"){
+        return producto[filtro] == parseFloat(param);
+     } else {
+        return producto[filtro].toLowerCase().includes(param.toLowerCase());
+     }
+  }
+)};
+  
+//esta no funciona con los numeros
+// function filtrar(filtro, param) {
+// 	return maquinas.filter((producto) => {
+//       return producto[filtro] == param;
+//     }
+//   )};
+
 
 function filtrarmaquinas() {
 	const nuevoFiltro = filtrar(formEditor.group.value, search.value);
@@ -112,6 +128,7 @@ function crearHtml(arr) {
     btn.addEventListener("click", () => {
       Swal.fire({
         title: '¿estas seguro que deseas eliminar esta maquina?',
+        text: "¡ojo que no hay vuelta atras!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
