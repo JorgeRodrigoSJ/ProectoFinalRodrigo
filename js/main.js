@@ -110,6 +110,22 @@ function crearHtml(arr) {
   const arrayBotones = document.querySelectorAll("td .btn");
   arrayBotones.forEach((btn) => {
     btn.addEventListener("click", () => {
+      Swal.fire({
+        title: '¿estas seguro que deseas eliminar esta maquina?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, borrala!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+      })
       maquinas = maquinas.filter((el) => el.item != btn.id);
       guardarLS(maquinas);
       crearHtml(maquinas);
@@ -119,17 +135,8 @@ function crearHtml(arr) {
 
 //editor de hs y km
 
-// btnCargar.addEventListener('click', () => {
-//   console.log("alertawachin");
-//   Toastify({
-//       text: "Probando toast!",
-//       duration: 6000
-//   }).showToast();
-// })
-
-
-function respuestaClick (e){
- // e.preventDefault();
+btnCargar.addEventListener('click', (e) => {
+  e.preventDefault();
   posicionArray = selectoritem.value-1;
   console.log(posicionArray);
   console.log(maquinas[posicionArray]);
@@ -141,12 +148,21 @@ function respuestaClick (e){
   Swal.fire({
     position: 'top-end',
     icon: 'success',
-    title: 'Your work has been saved',
+    title: 'Las horas o kilometros se cargaron correctamente',
     showConfirmButton: false,
-    timer: 6000
+    timer: 3000
   })
-  formEditor.reset()//este resetea la pantalla
-}
+})
+
+btnGuardar.addEventListener('click', (e) => {
+  Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: 'Se cargo la maquina correctamente',
+    showConfirmButton: false,
+    timer: 3000
+  })
+  })
 
 /* Fin de funciones */
 
@@ -156,7 +172,7 @@ crearHtml(maquinas);
 //Listeners
 
 formMaquinas.addEventListener("submit", (e) => {
-  //e.preventDefault();
+  e.preventDefault();
   const nuevoMaquina = new Maquina(
     nombre.value,
     marca.value,
